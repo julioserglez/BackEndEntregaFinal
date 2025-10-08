@@ -1,0 +1,33 @@
+<form id="productForm" action="{{action}}" method="POST">
+  <label for="productId">Codigo del Producto:</label>
+  <input type="number" id="productId" name="productId" value="{{product.productId}}" required>
+  {{#if errors.productId}}
+    <span class="error">{{errors.productId}}</span>
+  {{/if}}
+  <label for="description">Descripción:</label>
+  <input type="text" id="description" name="description" value="{{product.description}}" required>
+  {{#if errors.description}}
+    <span class="error">{{errors.description}}</span>
+  {{/if}}
+  <label for="price">Precio:</label>
+  <input type="number" step="0.01" id="price" name="price" value="{{product.price}}" required>
+  {{#if errors.price}}
+    <span class="error">{{errors.price}}</span>
+  {{/if}}
+  <label for="category">Categoría:</label>
+  <select name="category" id="category" value="{{product.category}}" required>
+    <option value="Electronica">Electrónica</option>
+    <option value="Computo">Computo</option>
+    <option value="Accesorios">Accesorios</option>
+    <option value="Sonido">Sonido</option>
+  </select>
+  {{#if errors.category}}
+    <span class="error">{{errors.category}}</span>
+  {{/if}}
+  <label for="stock">Existencias:</label>
+  <input type="text" id="stock" name="stock" value="{{product.stock}}" required>
+  {{#if errors.stock}}
+    <span class="error">{{errors.stock}}</span>
+  {{/if}}
+  <button type="submit">{{submitLabel}}</button>
+</form>

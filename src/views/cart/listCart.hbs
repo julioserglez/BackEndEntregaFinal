@@ -1,0 +1,21 @@
+<h2>Carrito de Productos</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Codigo</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each cart.products}}
+      {{> cartproductsCard}}
+    {{else}}
+      <tr><td colspan="4">Carrito vacío</td></tr>
+    {{/each}}
+  </tbody>
+</table>
+<hr>
+<a href="/cart">Carrito de Productos</a>

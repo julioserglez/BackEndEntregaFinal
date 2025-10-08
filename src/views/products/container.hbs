@@ -1,0 +1,23 @@
+<h2>Catalogo de Productos</h2>
+<form method="GET">
+  <input type="text" name="search" placeholder="Buscar por nombre">
+  <select name="category">
+    <option value="">Todas</option>
+    <option value="Electronica">Electrónica</option>
+    <option value="Computo">Computo</option>
+    <option value="Accesorios">Accesorios</option>
+    <option value="Sonido">Sonido</option>
+  </select>
+  <input type="number" name="minPrice" placeholder="Precio mínimo">
+  <input type="number" name="maxPrice" placeholder="Precio máximo">
+  <input type="number" name="productId" placeholder="Codigo del producto">
+  <button type="submit">Filtrar</button>
+</form>
+
+<div class="itemlistcontainer">
+    <ul class="item-list">
+    {{#each products}}
+        {{> itemlistCard}}
+    {{/each}}
+    </ul>
+</div>

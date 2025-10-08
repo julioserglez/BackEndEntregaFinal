@@ -1,0 +1,12 @@
+<h2>Detalles de Producto</h2>
+<ul>
+  <li><b>Codigo:</b> {{product.productId}}</li>
+  <li><b>Descripcion:</b> {{product.description}}</li>
+  <li><b>Precio:</b> ${{product.price}}</li>
+  <li><b>Categoría:</b> {{product.category}}</li>
+</ul>
+<a href="/products/edit/{{product._id}}">Editar</a>
+<form class="form-delete-inline" action="/products/delete/{{product._id}}" method="POST">
+<button type="submit" class="btn-danger">Eliminar</button>
+</form>
+<a href="/products">Volver a la lista</a>

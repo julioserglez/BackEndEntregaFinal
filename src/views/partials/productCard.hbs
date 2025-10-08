@@ -1,0 +1,13 @@
+<tr>
+  <td>{{productId}}</td>
+  <td>{{description}}</td>
+  <td>${{price}}</td>
+  <td>{{category}}</td>
+  <td>
+    <a href="/products/{{_id}}">Ver</a> |
+    <a href="/products/edit/{{_id}}">Editar</a> |
+    <form class="form-delete-inline" action="/products/delete/{{_id}}" method="POST">
+      <button type="submit" class="btn-danger">Eliminar</button>
+    </form>
+  </td>
+</tr>

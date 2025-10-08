@@ -1,0 +1,11 @@
+<tr>
+  <td>{{this.product.productId}}</td>
+  <td>{{this.product.description}}</td>
+  <td>${{this.product.price}}</td>
+  <td>{{this.quantity}}</td>
+  <td>
+    <form class="form-delete-inline_cart" action="/cart/remove/{{_id}}" method="POST">
+      <button type="submit" class="btn-danger">Eliminar</button>
+    </form>
+  </td>
+</tr>

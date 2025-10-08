@@ -1,0 +1,13 @@
+<h1>Lista de Productos</h1>
+<a href="/products/nuevo">Nuevo Producto</a>
+<ul>
+  {{#each products}}
+    <li>
+      {{description}} - ${{price}}
+      <a href="/products/editar/{{_id}}">Editar</a>
+      <form action="/products/{{_id}}?_method=DELETE" method="POST">
+        <button>Eliminar</button>
+      </form>
+    </li>
+  {{/each}}
+</ul>

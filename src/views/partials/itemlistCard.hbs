@@ -1,0 +1,17 @@
+<li class='item'>
+    <div class='img-item-container'>
+        <img class="img-item" src={{image}} alt="" />
+    </div>
+    <div class='text-item' >
+        <p class='title-item'>{{description}}</p>
+        <p class='price-item'>$ {{price}}</p>
+        <p class='code-item'>Codigo: {{productId}}</p>
+        <a href="/products/{{_id}}">
+            <p class='button-item'>Mas Informacion</p> 
+        </a>
+        <form class="form-add-cart" action="/cart/add/{{_id}}" method="POST">
+            <input type="hidden" name="productId" value="{{productId}}" />
+            <button type="submit" class="btn-add-cart">Agregar al Carrito</button>
+        </form>
+    </div>
+</li>

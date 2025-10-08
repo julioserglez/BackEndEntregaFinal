@@ -1,0 +1,32 @@
+<h2>Lista de Productos</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Codigo</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+      <th>Categoría</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each products}}
+      {{> productCard}}
+    {{else}}
+      <tr><td colspan="4">No hay productos registrados.</td></tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<div class="pagination">
+    {{#if pagination.hasPrevPage}}
+      <a href="?page={{pagination.prevPage}}">Anterior</a>
+    {{/if}}
+    <span>Página {{pagination.page}} de {{pagination.totalPages}}</span>
+    {{#if pagination.hasNextPage}}
+      <a href="?page={{pagination.nextPage}}">Siguiente</a>
+    {{/if}}
+</div>
+<hr>
+<a href="/products">Lista de Productos</a>
+
