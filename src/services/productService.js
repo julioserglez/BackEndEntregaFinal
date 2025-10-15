@@ -17,9 +17,9 @@ async function getProductById(id) {
 }
 
 async function createProduct(data) {
-  const { productId, description, price, stock, category } = data;
-  if (!productId || !description || !price || !stock || !category) {
-    throw new Error("Faltan campos requeridos: Codigo, Descripción, Existencia o Precio");
+  const { productId } = data;
+  if (!productId) {
+    throw new Error("El campo Codigo es obligatorio");
   }
   const existente = await productDao.getProductByIdProduct(productId);
   if (existente) {

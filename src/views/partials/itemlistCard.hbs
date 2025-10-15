@@ -1,6 +1,10 @@
 <li class='item'>
     <div class='img-item-container'>
-        <img class="img-item" src={{image}} alt="" />
+        {{#if image}}
+            <img class="img-item" src="{{image}}" alt="{{description}}">
+        {{else}}
+            <img class="img-item" src="/images/no-disponible.jpg" alt="Imagen no disponible">
+        {{/if}}
     </div>
     <div class='text-item' >
         <p class='title-item'>{{description}}</p>

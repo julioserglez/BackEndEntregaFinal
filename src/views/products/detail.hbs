@@ -1,12 +1,29 @@
-<h2>Detalles de Producto</h2>
-<ul>
-  <li><b>Codigo:</b> {{product.productId}}</li>
-  <li><b>Descripcion:</b> {{product.description}}</li>
-  <li><b>Precio:</b> ${{product.price}}</li>
-  <li><b>Categoría:</b> {{product.category}}</li>
-</ul>
-<a href="/products/edit/{{product._id}}">Editar</a>
+<h2>Detalle del Producto</h2>
+<div class="detail-product">
+  <div class="detail-container">
+    <div class="detail-data">
+      <h3>{{product.description}}</h3>
+      <p><strong>Precio:</strong> ${{product.price}}</p>
+      <p><strong>Categoría:</strong> {{product.category}}</p>
+      <p><strong>Codigo:</strong> {{product.productId}}</p>
+      <p><strong>Stock:</strong> {{product.stock}}</p>
+      {{#if product.stock }}
+        <p class="disponible">✅ Disponible</p>
+      {{else}}
+        <p class="no-disponible">❌ No disponible</p>
+      {{/if}}
+    </div>
+    <div class="detail-image">
+      {{#if image}}
+          <img src="{{product.image}}" alt="{{product.description}}">
+      {{else}}
+          <img src="/images/no-disponible.jpg" alt="Imagen no disponible">
+      {{/if}}
+    </div>
+  </div>
+  <a href="/products/edit/{{product._id}}">Editar</a>
+</div>
 <form class="form-delete-inline" action="/products/delete/{{product._id}}" method="POST">
-<button type="submit" class="btn-danger">Eliminar</button>
+  <button type="submit" class="btn-danger">Eliminar</button>
 </form>
 <a href="/products">Volver a la lista</a>

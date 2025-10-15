@@ -9,17 +9,6 @@ async function getAllProducts() {
   }
 }
 
-async function createProduct(data) {
-  try {
-    if (!data) throw new Error("Datos del producto no proporcionados");
-    const newProduct = new Product(data);
-    await newProduct.save();
-    return newProduct;
-  } catch (error) {
-    console.error("Error creando producto:", error);
-    throw new Error("Error al crear producto");
-  }
-}
 
 async function obtenerProductosUnicosOrdenados() {
   try {
@@ -43,12 +32,17 @@ async function getProductByID(_id) {
   }
 }
 
-async function getProductByIdProduct(productId) {
+
+///----------------------POST----------------------///
+async function createProduct(data) {
   try {
-    return await Product.findOne({productId});
-  } catch (error) { 
-    console.error("Error buscando por Codigo:", error);
-    return null;
+       
+    const newProduct = new Product(data);
+    await newProduct.save();
+    return newProduct;
+  } catch (error) {
+    console.error("Error creando producto:", error);
+    throw new Error("Error al crear producto");
   }
 }
 
@@ -72,6 +66,20 @@ async function deleteProductById(_id) {
     return null;
   }
 }
+
+////------------SERVICE------------///
+
+async function getProductByIdProduct(productId) {
+  try {
+    return await Product.findOne({productId});
+  } catch (error) { 
+    console.error("Error buscando por Codigo:", error);
+    return null;
+  }
+}
+
+
+
 
 module.exports = {
   getAllProducts, 

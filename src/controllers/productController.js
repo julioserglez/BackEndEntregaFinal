@@ -21,20 +21,12 @@ async function getAllProductsContainer(req, res) {
   }
 }
 
+///Formulario de creación
 async function  createProductsForm(req, res) {
   try {
-    res.render('products/create', { title: 'Crear producto', product: {}, errors: {} });
+    res.render('products/create', { title: 'Crear Nuevo producto', product: {}, errors: {} });
   } catch (error) {
     res.status(404).json({ error: error.message });
-  }
-}
-
-async function createProduct(req, res) {
-  try {
-    await productService.createProduct(req.body);
-    res.redirect('/products');
-  } catch (error) {
-    res.status(400).json({ error: error.message });
   }
 }
 
@@ -136,6 +128,7 @@ async function getAllProductsPagination(req, res) {
     }
 };
 
+/// Editar producto
 async function  getProductById(req, res) {
   try {
     const product = await productService.getProductById(req.params.id);
@@ -144,13 +137,134 @@ async function  getProductById(req, res) {
     res.status(404).json({ error: error.message });
   }
 }
-
+/// Formulario de edición
 async function  getProductByIdEdit(req, res) {
   try {
+    if (!req.params.id) {
+      return res.status(400).json({ error: "ID de producto no es válido" });
+    }
+
     const product = await productService.getProductById(req.params.id);
-    res.render('products/edit', { title: 'Editar producto', product });
+    const { _id, productId, description, price, category, stock } = product;
+   
+    res.render("products/edit", {
+      product: { _id, productId, description, price, category, stock },
+      errors: {}
+    });
+      
   } catch (error) {
     res.status(404).json({ error: error.message });
+  }
+}
+/*----------------------POST----------------------*/
+/// Boton de Guardar en el formulario de creación
+async function createProduct(req, res) {
+  try {
+    const { productId, description, price, category, stock } = req.body;
+    // Validar campos requeridos
+    if (!productId || isNaN(productId) || productId.trim() === '') {
+      return res.render("products/create", {
+        product: { productId, description, price, category, stock },
+        errors: { productId: "El codigo es obligatorio" },
+      });
+    }
+    if ( !description || typeof description !== 'string' || description.trim() === '') {
+      return res.render("products/create", {
+        product: { productId, description, price, category, stock },
+        errors: { description: "La descripción es obligatoria" }
+      });
+    }
+    if ( !price || isNaN(price) || price <= 0) {
+      return res.render("products/create", {
+        product: { productId, description, price, category, stock },
+        errors: { description: "El precio no es válido" }
+      });
+    }
+    if (!stock || isNaN(stock) || stock < 0) {
+      return res.render("products/create", {
+        product: { productId, description, price, category, stock },
+        errors: { description: "El stock no es válido" }
+      });
+    }
+    if (!category || typeof category !== "string" || category.trim() === "") {
+      return res.render("products/create", {
+        product: { productId, description, price, category, stock },
+        errors: { description: "La categoría es obligatoria" }
+      });
+    }
+    if (productId < 100 || productId > 999) {
+      return res.render("products/create", {
+        product: { productId, description, price, category, stock },
+        errors: { productId: "El código debe estar entre 100 y 999" }
+      });
+    }
+
+    // Validar que el código no exista previamente
+    const productoExistente = await productNum.findOne({ productId });
+    if (productoExistente) {
+      return res.render("products/create", {
+      action: "/products",
+      product: { productId, description, price, category, stock },
+      errors: { productId: "El código de producto ya existe." },
+      submitLabel: "Guardar"
+      });
+    }
+    
+    await productService.createProduct(req.body);
+    res.redirect('/products');
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
+
+async function updateProductById(req, res) {
+  try {
+    const { productId, description, price, category, stock } = req.body;
+    // Validar campos requeridos
+    if (!productId || isNaN(productId) || productId.trim() === '') {
+      return res.render("products/create", {
+        product: { productId, description, price, category, stock },
+        errors: { productId: "El codigo es obligatorio" },
+      });
+    }
+    if ( !description || typeof description !== 'string' || description.trim() === '') {
+      return res.render("products/create", {
+        product: { productId, description, price, category, stock },
+        errors: { description: "La descripción es obligatoria" }
+      });
+    }
+    if ( !price || isNaN(price) || price <= 0) {
+      return res.render("products/create", {
+        product: { productId, description, price, category, stock },
+        errors: { description: "El precio no es válido" }
+      });
+    }
+    if (!stock || isNaN(stock) || stock < 0) {
+      return res.render("products/create", {
+        product: { productId, description, price, category, stock },
+        errors: { description: "El stock no es válido" }
+      });
+    }
+    if (!category || typeof category !== "string" || category.trim() === "") {
+      return res.render("products/create", {
+        product: { productId, description, price, category, stock },
+        errors: { description: "La categoría es obligatoria" }
+      });
+    }
+    if (productId < 100 || productId > 999) {
+      return res.render("products/create", {
+        product: { productId, description, price, category, stock },
+        errors: { productId: "El código debe estar entre 100 y 999" }
+      });
+    }
+    
+    await productService.updateProductById(
+      req.params.id,
+      req.body
+    );
+    res.redirect('/products');
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 }
 
@@ -167,17 +281,7 @@ async function  createProductPost(req, res) {
   }
 }
 
-async function updateProductById(req, res) {
-  try {
-    await productService.updateProductById(
-      req.params.id,
-      req.body
-    );
-    res.redirect('/products');
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-}
+
 
 async function deleteProductById(req, res) {
   try {

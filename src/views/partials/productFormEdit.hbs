@@ -1,6 +1,6 @@
-<form id="productForm" action="{{action}}" method="POST">
+<form id="productForm" action="/products/update/{{product._id}}" method="POST">
   <label for="productId">Codigo del Producto:</label>
-  <input type="number" id="productId" name="productId" value="{{product.productId}}" min="100" max="999" required>
+  <input type="number" id="productId" name="productId" value="{{product.productId}}" min="100" max="999" readonly>
   {{#if errors.productId}}
     <span class="error">{{errors.productId}}</span>
   {{/if}}

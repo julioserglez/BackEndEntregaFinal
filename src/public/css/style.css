@@ -246,3 +246,28 @@ flex-direction: column;
     width: 70%;
     height: 70%;
 }
+/*-------------------DETALLE PRODUCTO--------------------------*/
+.detail-product {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #f9f9f9;
+}
+
+.detail-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.detail-data {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.detail-image img {
+  max-width: 300px;
+  border-radius: 6px;
+}
